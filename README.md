@@ -55,3 +55,18 @@ Requires the .NET SDK pinned in `global.json` (.NET 10).
 dotnet build
 dotnet test
 ```
+
+## Package
+
+Published to NuGet as [`Capital`](https://www.nuget.org/packages/Capital) by the CI workflow on
+`v*` tags. Install:
+
+```sh
+dotnet add package Capital
+```
+
+Versioning: 0.x — the API is young; breaking changes may land without ceremony.
+
+## License
+
+MIT — see `LICENSE`.

@@ -1,0 +1,29 @@
+name: publish
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: restore
+        run: dotnet restore
+      - name: build
+        run: dotnet build -c Release --no-restore
+      - name: test
+        run: dotnet test -c Release --no-build
+      - name: pack
+        run: dotnet pack src/Capital -c Release --no-build -o dist
+      - name: push to nuget.org
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: dotnet nuget push dist/*.nupkg --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
