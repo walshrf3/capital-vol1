@@ -26,6 +26,13 @@ public class LaborTimeTests
     }
 
     [Fact]
+    public void Division_yields_the_per_unit_value()
+    {
+        Assert.Equal(LaborTime.FromHours(2m), LaborTime.FromHours(4m) / 2m);
+        Assert.Throws<ArgumentOutOfRangeException>(() => LaborTime.FromHours(4m) / 0m);
+    }
+
+    [Fact]
     public void Ordering_follows_hours()
     {
         Assert.True(LaborTime.FromHours(12m) > LaborTime.FromHours(10m));

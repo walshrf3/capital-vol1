@@ -43,6 +43,12 @@ public readonly record struct LaborTime : IComparable<LaborTime>
     /// <summary>Commutative form of scaling: a quantity of units times the per-unit labour time.</summary>
     public static LaborTime operator *(decimal factor, LaborTime time) => time * factor;
 
+    /// <summary>Divides labour time by a positive number of units — the per-unit value under a given productivity.</summary>
+    public static LaborTime operator /(LaborTime time, decimal divisor) =>
+        divisor <= 0m
+            ? throw new ArgumentOutOfRangeException(nameof(divisor), divisor, "Cannot divide labour time by a non-positive number.")
+            : new LaborTime(time.Hours / divisor);
+
     public static bool operator >(LaborTime left, LaborTime right) => left.Hours > right.Hours;
     public static bool operator >=(LaborTime left, LaborTime right) => left.Hours >= right.Hours;
     public static bool operator <(LaborTime left, LaborTime right) => left.Hours < right.Hours;
