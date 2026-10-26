@@ -6,6 +6,12 @@ namespace Capital.Value;
 /// a new form surfaces loudly at every consumption site (C# does not yet enforce exhaustiveness
 /// over class hierarchies, so the throwing default is the guardrail).
 /// </summary>
+/// <remarks>
+/// §4 (commodity fetishism) introduces no new primitive: it is Marx's commentary on exactly these
+/// forms. With the value form, the social character of the producers' private labours appears as
+/// the social — indeed natural — character of the things themselves. Its content lives here in the
+/// forms' social validity: the equal-labour invariants and the socially fixed equivalent.
+/// </remarks>
 public abstract record ValueForm
 {
     /// <summary>The lots whose values are being expressed (relative form side).</summary>
