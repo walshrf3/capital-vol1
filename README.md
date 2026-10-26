@@ -16,6 +16,7 @@ rather than stored twice.
 | `src/Capital` | The library — one namespace per analytical layer |
 | `src/Capital/Circulation` | Exchange, money functions, and circuits (ch. 2–4) |
 | `src/Capital/Production` | Labour-power and the production of surplus value (ch. 6–11) |
+| `src/Capital/Wages` | The transformed wage forms (ch. 16–21) |
 | `tests/Capital.Tests` | xUnit tests proving the invariants |
 
 ## Roadmap
@@ -26,7 +27,7 @@ rather than stored twice.
 | Part 2, ch. 4–6 — general formula of capital, labour-power | `Capital.Circulation` | started: `MoneyCircuit` (M–C–M′, ch. 4) composed from the same `Sale`/`Purchase`; the formula's contradiction documented on the type. Next: labour-power as commodity (ch. 6), the contradiction resolved in production |
 | Part 3, ch. 7–11 — production of absolute surplus value | `Capital.Production` | covered: labour-power and subsistence (ch. 6) resolving the contradiction of M–C–M′ via `CapitalistCircuit` (M–C…P…C′–M′); the valorization process with c, v, s and product value = c + new value (ch. 7–8); rate s′ = s/v (ch. 9); mass S = v × s′ (ch. 11). The working-day minimum appears as an invariant; the length struggle (ch. 10) is not separately modeled |
 | Part 4, ch. 12–15 — production of relative surplus value | `Capital.Production` | covered: `SurplusProfit` (individual vs social value — the motive of innovation, transient by construction) and `RelativeSurplusValue` (cheapened labour-power, fixed working day, s′ rises). Co-operation, division of labour/manufacture, and machinery (ch. 13–15) documented as the carriers of the productivity rise; fixed-capital depreciation not separately modeled |
-| Part 5, ch. 16–20 — wages | `Capital.Wages` | not started: value of labour-power presenting itself as the price of labour |
+| Part 5, ch. 16–21 — wages | `Capital.Wages` | covered: `TimeWage` (the apparent "price of an hour of labour"; market divergence from the value of labour-power representable — the engine of the illusion, ch. 17) and `PieceWage` (the converted form of the time-wage, `ConvertedFrom`, with its concealments documented). Deliberately no "value of labour" type: labour is the substance of value, not a commodity (ch. 16) |
 | Part 6–7, ch. 21–25 — accumulation | `Capital.Accumulation` | not started: simple and expanded reproduction, organic composition of capital, the general law of capitalist accumulation |
 | Part 8, ch. 26–33 — primitive accumulation | `Capital.Accumulation` | not started |
 

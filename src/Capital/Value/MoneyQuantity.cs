@@ -47,6 +47,12 @@ public readonly record struct MoneyQuantity : IComparable<MoneyQuantity>
             ? throw new ArgumentOutOfRangeException(nameof(divisor), divisor, "Cannot divide money by a non-positive number.")
             : new MoneyQuantity(money.Amount / divisor, money.Unit);
 
+    /// <summary>Scales money by a non-negative factor (e.g. pieces produced at a piece price).</summary>
+    public static MoneyQuantity operator *(MoneyQuantity money, decimal factor) =>
+        factor < 0m
+            ? throw new ArgumentOutOfRangeException(nameof(factor), factor, "Cannot scale money by a negative factor.")
+            : new MoneyQuantity(money.Amount * factor, money.Unit);
+
     public static bool operator >(MoneyQuantity left, MoneyQuantity right) { RequireSameUnit(left, right); return left.Amount > right.Amount; }
     public static bool operator >=(MoneyQuantity left, MoneyQuantity right) { RequireSameUnit(left, right); return left.Amount >= right.Amount; }
     public static bool operator <(MoneyQuantity left, MoneyQuantity right) { RequireSameUnit(left, right); return left.Amount < right.Amount; }

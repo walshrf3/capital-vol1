@@ -39,6 +39,13 @@ public class MoneyQuantityTests
     }
 
     [Fact]
+    public void Scaling_multiplies_by_a_positive_factor()
+    {
+        Assert.Equal(MoneyQuantity.From(3m, "£"), MoneyQuantity.From(2m, "£") * 1.5m);
+        Assert.Throws<ArgumentOutOfRangeException>(() => MoneyQuantity.From(2m, "£") * -1m);
+    }
+
+    [Fact]
     public void Ordering_follows_amounts_within_a_unit()
     {
         Assert.True(MoneyQuantity.From(3m, "£") > MoneyQuantity.From(2m, "£"));
