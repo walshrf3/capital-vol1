@@ -15,6 +15,7 @@ rather than stored twice.
 | --- | --- |
 | `src/Capital` | The library — one namespace per analytical layer |
 | `src/Capital/Circulation` | Exchange, money functions, and circuits (ch. 2–4) |
+| `src/Capital/Production` | Labour-power and the production of surplus value (ch. 6–11) |
 | `tests/Capital.Tests` | xUnit tests proving the invariants |
 
 ## Roadmap
@@ -23,7 +24,7 @@ rather than stored twice.
 | --- | --- | --- |
 | Part 1, ch. 1–3 — commodities, value, money | `Capital.Value` | covered: the commodity and its value (`LaborTime`, `UseValue`, `Commodity`, `Quantity`, `CommodityLot`); all four forms of value (`ValueForm`, §3a–d; §4 fetishism documented on the type); money (ch. 2–3): `MoneyQuantity`, `Price`, `Sale`/`Purchase`/`CommodityCircuit`, `MediumOfCirculation`, `Hoard`, `Debt`/`Payment`, `WorldMoney`. Coin/token money not separately modeled |
 | Part 2, ch. 4–6 — general formula of capital, labour-power | `Capital.Circulation` | started: `MoneyCircuit` (M–C–M′, ch. 4) composed from the same `Sale`/`Purchase`; the formula's contradiction documented on the type. Next: labour-power as commodity (ch. 6), the contradiction resolved in production |
-| Part 3, ch. 7–11 — production of absolute surplus value | `Capital.Production` | not started: labour process vs valorization, constant/variable capital, surplus value, rate of surplus value s′ = s/v, the working day |
+| Part 3, ch. 7–11 — production of absolute surplus value | `Capital.Production` | covered: labour-power and subsistence (ch. 6) resolving the contradiction of M–C–M′ via `CapitalistCircuit` (M–C…P…C′–M′); the valorization process with c, v, s and product value = c + new value (ch. 7–8); rate s′ = s/v (ch. 9); mass S = v × s′ (ch. 11). The working-day minimum appears as an invariant; the length struggle (ch. 10) is not separately modeled |
 | Part 4, ch. 12–15 — production of relative surplus value | `Capital.Production` | not started: relative surplus value, co-operation, division of labour and manufacture, machinery and modern industry |
 | Part 5, ch. 16–20 — wages | `Capital.Wages` | not started: value of labour-power presenting itself as the price of labour |
 | Part 6–7, ch. 21–25 — accumulation | `Capital.Accumulation` | not started: simple and expanded reproduction, organic composition of capital, the general law of capitalist accumulation |

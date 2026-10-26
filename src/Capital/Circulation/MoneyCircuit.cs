@@ -13,7 +13,9 @@ namespace Capital.Circulation;
 /// The contradiction of the formula (ch. 4 §2): surplus value cannot originate in circulation
 /// itself — an exchange of equivalents leaves the total value unchanged — nor outside it. The
 /// formula's own resolution, the consumption of labour-power in production, arrives with Part 3
-/// (ch. 6); until then <see cref="SurplusValue"/> names a result whose source is not yet represented.
+/// (ch. 6): <see cref="Capital.Production.CapitalistCircuit"/> — labour-power is bought at its
+/// value yet creates more value in consumption. Until then, <see cref="SurplusValue"/> names a
+/// result whose source is not yet represented.
 /// </remarks>
 public sealed record MoneyCircuit
 {
