@@ -40,6 +40,9 @@ public readonly record struct LaborTime : IComparable<LaborTime>
             ? throw new ArgumentOutOfRangeException(nameof(factor), factor, "Cannot scale labour time by a negative factor.")
             : new LaborTime(time.Hours * factor);
 
+    /// <summary>Commutative form of scaling: a quantity of units times the per-unit labour time.</summary>
+    public static LaborTime operator *(decimal factor, LaborTime time) => time * factor;
+
     public static bool operator >(LaborTime left, LaborTime right) => left.Hours > right.Hours;
     public static bool operator >=(LaborTime left, LaborTime right) => left.Hours >= right.Hours;
     public static bool operator <(LaborTime left, LaborTime right) => left.Hours < right.Hours;

@@ -1,36 +1,36 @@
 using Capital.Value;
-using Xunit;
 
 namespace Capital.Tests.Value;
 
 public class CommodityTests
 {
-    private static readonly UseValue LinenUse = new("Cloth, 20 yards of linen");
-    private static readonly UseValue CoatUse = new("A coat");
+    public static readonly Commodity Linen = new("linen", new UseValue("Woven cloth"), "yards", LaborTime.FromHours(0.5m));
+    public static readonly Commodity Coat = new("coat", new UseValue("A garment"), "coat", LaborTime.FromHours(10m));
+
+    [Fact]
+    public void Lot_value_is_quantity_times_per_unit_labour()
+    {
+        var lot = new CommodityLot(Linen, new Quantity(20m, "yards"));
+        Assert.Equal(LaborTime.FromHours(10m), lot.Value);
+    }
 
     [Fact]
     public void Commodities_with_equal_components_are_equal()
     {
-        var a = new Commodity("Linen", LinenUse, LaborTime.FromHours(10m));
-        var b = new Commodity("Linen", LinenUse, LaborTime.FromHours(10m));
-
-        Assert.Equal(a, b);
-        Assert.True(a == b);
-    }
-
-    [Fact]
-    public void Commodities_with_different_values_are_not_equal()
-    {
-        var a = new Commodity("Linen", LinenUse, LaborTime.FromHours(10m));
-        var b = new Commodity("Linen", LinenUse, LaborTime.FromHours(12m));
-
-        Assert.NotEqual(a, b);
+        var twin = new Commodity("linen", new UseValue("Woven cloth"), "yards", LaborTime.FromHours(0.5m));
+        Assert.Equal(Linen, twin);
     }
 
     [Fact]
     public void Blank_name_is_rejected()
     {
-        Assert.Throws<ArgumentException>(() => new Commodity(" ", LinenUse, LaborTime.Zero));
+        Assert.Throws<ArgumentException>(() => new Commodity(" ", new UseValue("Woven cloth"), "yards", LaborTime.Zero));
+    }
+
+    [Fact]
+    public void Blank_unit_is_rejected()
+    {
+        Assert.Throws<ArgumentException>(() => new Commodity("linen", new UseValue("Woven cloth"), " ", LaborTime.Zero));
     }
 
     [Fact]
@@ -40,32 +40,15 @@ public class CommodityTests
     }
 
     [Fact]
-    public void Simple_value_form_equates_commodities_of_equal_labour()
+    public void Lot_rejects_defaulted_quantity()
     {
-        var linen = new Commodity("20 yards of linen", LinenUse, LaborTime.FromHours(10m));
-        var coat = new Commodity("1 coat", CoatUse, LaborTime.FromHours(10m));
-
-        var form = SimpleValueForm.Create(linen, coat);
-
-        Assert.Equal(linen, form.Relative);
-        Assert.Equal(coat, form.Equivalent);
-        Assert.Equal("20 yards of linen = 1 coat", form.ToString());
+        Assert.Throws<ArgumentOutOfRangeException>(() => new CommodityLot(Linen, default));
     }
 
     [Fact]
-    public void Simple_value_form_rejects_unequal_values()
+    public void Lot_renders_the_way_Marx_writes_it()
     {
-        var linen = new Commodity("20 yards of linen", LinenUse, LaborTime.FromHours(10m));
-        var coat = new Commodity("1 coat", CoatUse, LaborTime.FromHours(12m));
-
-        Assert.Throws<ArgumentException>(() => SimpleValueForm.Create(linen, coat));
-    }
-
-    [Fact]
-    public void A_commodity_cannot_be_its_own_equivalent()
-    {
-        var linen = new Commodity("20 yards of linen", LinenUse, LaborTime.FromHours(10m));
-
-        Assert.Throws<ArgumentException>(() => SimpleValueForm.Create(linen, linen));
+        Assert.Equal("20 yards of linen", new CommodityLot(Linen, new Quantity(20m, "yards")).ToString());
+        Assert.Equal("1 coat", new CommodityLot(Coat, new Quantity(1m, "coat")).ToString());
     }
 }

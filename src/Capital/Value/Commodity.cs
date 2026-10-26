@@ -1,22 +1,26 @@
 namespace Capital.Value;
 
 /// <summary>
-/// The elementary form of bourgeois wealth (Capital I, ch. 1): a thing with a use-value whose value
-/// is the quantity of abstract labour congealed in it. <see cref="Value"/> is expressed for the
-/// definite quantity named by the use-value (e.g. "20 yards of linen").
+/// A kind of commodity (Capital I, ch. 1 §1): a use-value with a unit of measure and a definite
+/// value per unit — the socially necessary labour time congealed in one unit. Concrete traded
+/// quantities are <see cref="CommodityLot"/>s.
 /// </summary>
 public sealed record Commodity
 {
     public string Name { get; }
     public UseValue UseValue { get; }
-    public LaborTime Value { get; }
+    public string Unit { get; }
+    public LaborTime UnitValue { get; }
 
-    public Commodity(string name, UseValue useValue, LaborTime value)
+    public Commodity(string name, UseValue useValue, string unit, LaborTime unitValue)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("A commodity needs a name.", nameof(name));
+        if (string.IsNullOrWhiteSpace(unit))
+            throw new ArgumentException("A commodity needs a unit of measure.", nameof(unit));
         Name = name;
         UseValue = useValue ?? throw new ArgumentNullException(nameof(useValue));
-        Value = value;
+        Unit = unit;
+        UnitValue = unitValue;
     }
 }

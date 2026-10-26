@@ -20,7 +20,7 @@ rather than stored twice.
 
 | *Capital* Vol. I | Module | Status |
 | --- | --- | --- |
-| Part 1, ch. 1–3 — commodities, value, money | `Capital.Value` | started: `LaborTime`, `UseValue`, `Commodity`, simple form of value. Next: expanded/general/money forms, money (measure of value, circulation, hoard, means of payment, world money), circulation |
+| Part 1, ch. 1–3 — commodities, value, money | `Capital.Value` | started: `LaborTime`, `UseValue`, `Commodity`, `Quantity`, `CommodityLot`, and all four forms of value (`ValueForm`: simple, expanded, general, money — ch. 1 §3a–d). Next: fetishism (§4), money and its functions, circulation |
 | Part 2, ch. 4–6 — general formula of capital, labour-power | `Capital.Circulation` | not started: C–M–C vs M–C–M′, contradiction of the general formula, labour-power as commodity |
 | Part 3, ch. 7–11 — production of absolute surplus value | `Capital.Production` | not started: labour process vs valorization, constant/variable capital, surplus value, rate of surplus value s′ = s/v, the working day |
 | Part 4, ch. 12–15 — production of relative surplus value | `Capital.Production` | not started: relative surplus value, co-operation, division of labour and manufacture, machinery and modern industry |
@@ -36,8 +36,10 @@ rather than stored twice.
   its own unit type (Part 1, ch. 3) — not an alias for hours.
 - **Qualitative categories are sealed records** (`UseValue`, `Commodity`); value equality means
   all components equal.
-- **Alternative forms are sealed hierarchies with exhaustive `switch`** (the forms of value, the
-  forms of capital) so adding a form forces every consumption site to handle it.
+- **Alternative forms are one sealed hierarchy** (`ValueForm` and its successors) **consumed only
+  through `switch` expressions with an arm per form; the wildcard arm throws.** C# does not yet
+  enforce exhaustiveness over class hierarchies, so the throwing default is the guardrail: a new
+  form surfaces loudly at every consumption site instead of being silently dropped.
 - **Derived quantities are computed, not stored** (e.g. s′ = s/v will be a function of surplus
   value and variable capital).
 
